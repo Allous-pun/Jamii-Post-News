@@ -1,0 +1,143 @@
+{% load static %}
+<header>
+    <style>
+        /* Default logo size for larger screens */
+        .sticky-logo img {
+            max-width: 200px; /* Adjust the size as needed */
+            height: auto;
+        }
+
+        /* Adjust logo size for tablets */
+        @media (max-width: 992px) {
+            .sticky-logo img {
+                max-width: 250px; /* Smaller size for tablets */
+            }
+        }
+
+        /* Adjust logo size for mobile devices */
+        @media (max-width: 768px) {
+            .sticky-logo img {
+                max-width: 200px; /* Smaller size for mobiles */
+            }
+        }
+
+        /* Optional: Center-align the logo on smaller screens */
+        @media (max-width: 576px) {
+            .sticky-logo {
+                text-align: left;
+            }
+        }
+
+        /* Make search icon visible on smaller screens */
+        .nav-search {
+            display: block;
+            text-align: right;
+        }
+
+        /* Adjust position for mobile screens */
+        @media (max-width: 768px) {
+            .nav-search {
+                text-align: center; /* Center the search icon */
+                margin-top: 10px; /* Add space if needed */
+            }
+        }
+
+        /* Optional adjustments for extra small screens */
+        @media (max-width: 576px) {
+            .nav-search {
+                font-size: 18px; /* Adjust size of the icon */
+                margin-top: 5px; /* Reduce spacing */
+            }
+        }
+    </style>
+    <!-- Header Start -->
+    <div class="header-area">
+        <div class="main-header ">
+            <div class="header-top black-bg d-none d-sm-block">
+                <div class="container">
+                    <div class="col-xl-12">
+                        <div class="row d-flex justify-content-between align-items-center">
+                            <div class="header-info-left">
+                                <ul>
+                                    <li>Mobile Number: {{first_page.mobilenumber}}</li>
+                                    <li>email: {{first_page.email}}</li>
+                                </ul>
+                            </div>
+                            <div class="header-info-right">
+                                <ul class="header-date">
+                                    <a href="{% url 'login' %}"><li><span class="flaticon-calendar"></span> Admin</li></a>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-mid gray-bg">
+                <div class="container">
+                    <div class="row d-flex align-items-center">
+                        <!-- Logo -->
+                        <div class="col-xl-3 col-lg-3 col-md-3 d-none d-md-block">
+                            <div class="logo">
+                                <a href="{% url 'index' %}"><h3>Jamii Post</h3></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-9 col-lg-9 col-md-9">
+                            <div class="header-banner f-right ">
+                                <img src="{% static 'assets/img/' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-bottom header-sticky">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-8 col-lg-8 col-md-12 header-flex">
+                            <!-- sticky -->
+                            <div class="sticky-logo">
+                                <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo.png' %}" alt=""></a>
+                            </div>
+                            <!-- Main-menu -->
+                            <div class="main-menu d-none d-md-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="{% url 'index' %}">Home</a></li>
+                                        <li><a href="{% url 'aboutus' %}">About</a></li>
+
+                                        <li><a href="#">Category</a>
+                                            <ul class="submenu">
+                                                {% for cat in cat %}
+                                                <li><a href="{% url 'category_detail' id=cat.id %}">{{ cat.catname }}</a></li>{% endfor %}
+
+                                            </ul>
+                                        </li>
+                                        <li><a href="{% url 'contactus' %}">Contact</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4">
+                            <div class="header-right f-right d-none d-lg-block">
+                                    <ul class="header-social">
+                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                        <li> <a href="#"><i class="fab fa-youtube"></i></a></li>
+                                    </ul>
+
+                                <div class="nav-search search-switch">
+                                    <a href="{% url 'search_news' %}"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-md-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+</header>

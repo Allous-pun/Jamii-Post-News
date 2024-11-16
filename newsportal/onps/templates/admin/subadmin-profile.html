@@ -1,0 +1,90 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="pagetitle">
+      <h1>Sub Admin Profile</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item">Sub Admin</li>
+         
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+      <div class="row">
+       
+
+        <div class="col-lg-12" style="padding-left: 100px;padding-right: 100px;">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Sub Admin Details</h5>
+              {% if messages %}
+              {% for message in messages %}
+               {% if message.tags == 'error' %}
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+               </button>
+                </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+                 {% if messages %}
+              {% for message in messages %}
+               {% if message.tags == 'success' %}
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+               </button>
+                </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+              <!-- Vertical Form -->
+              <form class="row g-3" method="POST" action="{% url 'subadmin_profile_update' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="col-12">
+                    <label for="inputNanme4" class="form-label">Old Profile Pic</label>
+                    <img src="{{user1.profile_pic.url}}" width="100" height="100">
+                  </div>
+                <div class="col-12">
+                  <label for="inputNanme4" class="form-label">Profile Pic</label>
+                  <input type="file" class="form-control" name="profile_pic">
+                </div>
+                <div class="col-12">
+                  <label for="inputEmail4" class="form-label">First Name</label>
+                  <input type="text" class="form-control" name="first_name" value="{{user1.first_name}}">
+                  <input type="hidden" class="form-control" name="userid" id="userid" value="{{user1.id}}">
+                </div>
+                <div class="col-12">
+                  <label for="inputPassword4" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" name="last_name" value="{{user1.last_name}}">
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress" class="form-label">Email</label>
+                  <input type="email" class="form-control" readonly="True" name="email" value="{{user1.email}}">
+                </div>
+                <div class="col-12">
+                    <label for="inputAddress" class="form-label">Username</label>
+                    <input type="text" class="form-control" readonly="True" name="username" value="{{user1.username}}">
+                  </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  
+                </div>
+              </form><!-- Vertical Form -->
+
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </section>
+    {% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'base1.html' %}
+{% block content %}
+{% load static %}
+<div class="about-area2 gray-bg pt-60 pb-60">
+        <div class="container">
+                <div class="row">
+                <div class="col-lg-12">
+                    <div class="whats-news-wrapper">
+                        <!-- Heading & Nav Button -->
+                            <div class="row justify-content-between align-items-end mb-15">
+                                <div class="col-xl-4">
+                                    <div class="section-tittle mb-30">
+                                        <h3>{{catid.catname}}(News)</h3>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                            <!-- Tab content -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <!-- Nav Card -->
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <!-- card one -->
+                                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
+                                            <div class="row">
+                                                {% if news %}
+                        {% for i in news  %}
+                                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                                    <div class="whats-news-single mb-40 mb-40">
+                                                        <div class="whates-img">
+                                                            <img src="{{i.postimage.url}}" alt="">
+                                                        </div>
+                                                        <div class="whates-caption whates-caption2">
+                                                            <h4><a href="{% url 'view_single_news' i.id %}">{{i.posttitle}}</a></h4>
+                                                            <span>{{i.posted_date}}</span>
+                                                            <p>{{i.postdetails|slice:":300"}}.</p>
+                                                            <p style="padding-top: 10px;"><a href="{% url 'view_single_news' i.id %}" class="btn btn-primary">Read More...</a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>{% endfor %}
+                                                {% else %}
+                                                
+                                                <div class="col-lg-4 col-md-6 single-exhibition">
+                                                    <p style="font-size: 20px; color: red;">No News available.</p>
+                                                </div>
+                                                {% endif %}
+                                              
+                                               
+                                            </div>
+                                        </div>
+                                        <!-- Card two -->
+                                        
+                                    </div>
+                                <!-- End Nav Card -->
+                                </div>
+                            </div>
+                    </div>
+                    </div>
+                    
+                </div>
+        </div>
+    </div>
+    <!-- About US End -->
+    <!--Start pagination -->
+    <div class="pagination-area  gray-bg pb-45">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="single-wrap">
+                        <nav aria-label="Page navigation example">
+                           
+                                <span class="step-links">
+                                    {% if news.has_previous %}
+                                        <a href="?page=1">&laquo; first</a>
+                                        <a href="?page={{ news.previous_page_number }}">previous</a>
+                                    {% endif %}
+                        
+                                    <span class="current">
+                                        Page {{ news.number }} of {{ news.paginator.num_pages }}.
+                                    </span>
+                        
+                                    {% if news.has_next %}
+                                        <a href="?page={{ news.next_page_number }}">next</a>
+                                        <a href="?page={{ news.paginator.num_pages }}">last &raquo;</a>
+                                    {% endif %}
+                                </span>
+                            
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>{% endblock %}
+    <!-- End pagination  -->

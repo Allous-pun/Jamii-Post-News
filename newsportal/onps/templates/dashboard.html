@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section dashboard">
+    <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+            <div class="row">
+
+                <!-- Category Card -->
+                <div class="col-xxl-6 col-md-6">
+                    <div class="card info-card sales-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total <span>| Categories</span></h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-files"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>{{ category_count }}</h6>
+                                    <a href="{% url 'manage_category' %}"><span class="text-muted small pt-2 ps-1">View Details</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End Category Card -->
+
+                <!-- Subcategory Card -->
+                <div class="col-xxl-6 col-md-6">
+                    <div class="card info-card revenue-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total <span>| Subcategories</span></h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-files"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>{{ subcategory_count }}</h6>
+                                    <a href="{% url 'manage_subcategory' %}"><span class="text-muted small pt-2 ps-1">View Details</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End Subcategory Card -->
+
+                <!-- News Card -->
+                <div class="col-xxl-6 col-xl-12">
+                    <div class="card info-card customers-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total <span>| News</span></h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-files"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>{{ news_count }}</h6>
+                                    <a href="{% url 'manage_posts' %}"><span class="text-muted small pt-2 ps-1">View Details</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End News Card -->
+
+                <!-- Sub-Admin Card -->
+                <div class="col-xxl-6 col-md-6">
+                    <div class="card info-card revenue-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total <span>| Sub-Admins</span></h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-person"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>{{ subadmin_count }}</h6>
+                                    <a href="{% url 'manage_subadmin' %}"><span class="text-muted small pt-2 ps-1">View Details</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End Sub-Admin Card -->
+
+            </div>
+        </div><!-- End Left side columns -->
+
+    </div>
+</section>
+{% endblock %}

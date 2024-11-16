@@ -1,0 +1,77 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="pagetitle">
+      <h1>Update Category</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item">Update Category</li>
+         
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+      <div class="row">
+       
+
+        <div class="col-lg-12" style="padding-left: 100px;padding-right: 100px;">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Update Category</h5>
+              {% if messages %}
+              {% for message in messages %}
+               {% if message.tags == 'error' %}
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+               </button>
+                </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+                 {% if messages %}
+              {% for message in messages %}
+               {% if message.tags == 'success' %}
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+               </button>
+                </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+              <!-- Vertical Form -->
+              <form class="row g-3" method="POST" action="{% url 'update_category_details' %}">
+                {% csrf_token %}
+
+                
+                <div class="col-12">
+                  <label for="inputEmail4" class="form-label">Category Name</label>
+                  <input type="text" name="catname" class="form-control" required="true" value="{{category.catname}}">
+                  <input type="hidden" name="cat_id" class="form-control" id="cat_id" required="true" value="{{category.id}}">
+                </div>
+                <div class="col-12">
+                  <label for="inputPassword4" class="form-label">Description</label>
+                  <textarea  name="catdes" class="form-control" >{{category.catdes}}</textarea>
+                </div>
+                
+                
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Update</button>
+                 
+                </div>
+              </form><!-- Vertical Form -->
+
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </section>
+    {% endblock %}

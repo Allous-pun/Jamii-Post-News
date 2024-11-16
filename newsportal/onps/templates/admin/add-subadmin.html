@@ -1,0 +1,90 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="pagetitle">
+      <h1>Profile</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item">Profile</li>
+         
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+      <div class="row">
+       
+
+        <div class="col-lg-12" style="padding-left: 100px;padding-right: 100px;">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Add Subadmin Details</h5>
+              {% if messages %}
+              {% for message in messages %}
+               {% if message.tags == 'error' %}
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+               </button>
+                </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+                 {% if messages %}
+              {% for message in messages %}
+               {% if message.tags == 'success' %}
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+               </button>
+                </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+              <!-- Vertical Form -->
+              <form class="row g-3" method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+
+               
+                <div class="col-12">
+                  <label for="inputNanme4" class="form-label">Profile Pic</label>
+                  <input type="file" class="form-control" name="profile_pic" required="true">
+                </div>
+                <div class="col-12">
+                  <label for="inputEmail4" class="form-label">First Name</label>
+                  <input type="text" class="form-control" name="first_name" required="true">
+                </div>
+                <div class="col-12">
+                  <label for="inputPassword4" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" name="last_name" required="true">
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress" class="form-label">Email</label>
+                  <input type="email" class="form-control" required="true" name="email">
+                </div>
+                <div class="col-12">
+                    <label for="inputAddress" class="form-label">Username</label>
+                    <input type="text" class="form-control" required="true" name="username">
+                  </div>
+                  <div class="col-12">
+                    <label for="inputAddress" class="form-label">Password</label>
+                    <input id="password" type="password" class="form-control" name="password" required="true">
+                  </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+              </form><!-- Vertical Form -->
+
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </section>
+    {% endblock %}

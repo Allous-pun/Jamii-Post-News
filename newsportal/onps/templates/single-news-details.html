@@ -1,0 +1,135 @@
+{% extends 'base1.html' %}
+{% block content %}
+{% load static %}
+   <!--================Blog Area =================-->
+   <section class="blog_area single-post-area section-padding">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-8 posts-list">
+               <div class="single-post">
+                  <div class="feature-img">
+                     <img class="img-fluid" src="{{sinnews.postimage.url}}" alt="">
+                  </div>
+                  <div class="blog_details">
+                     <h2>{{sinnews.posttitle}}
+                     </h2>
+                     <ul class="blog-info-link mt-3 mb-4">
+                        <li><a href="#"><i class="fa fa-user"></i> {{sinnews.cat_id.catname}}</a></li>
+
+                     </ul>
+                     <p class="excert">
+                        {{sinnews.postdetails}}
+                     </p>
+                    
+                   
+                  </div>
+               </div>
+             
+          
+               <div class="comments-area">
+                  <h4>Comments</h4>
+                  {% if comments_list %}
+                  {% for i in comments_list  %}
+                  <div class="comment-list">
+                     <div class="single-comment justify-content-between d-flex">
+                        <div class="user justify-content-between d-flex">
+                           <div class="thumb">
+                              <img src="{% static 'assets1/img/comment/comment_1.png'%}" alt="">
+                           </div>
+                           <div class="desc">
+                              <p class="comment">
+                                {{i.comment}}
+                              </p>
+                              <div class="d-flex justify-content-between">
+                                 <div class="d-flex align-items-center">
+                                    <h5>
+                                       <a href="#"> {{i.name}}</a>
+                                    </h5>
+                                    <p class="date">{{i.posted_date}}</p>
+                                 </div>
+                               
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  {% endfor %}
+                                                {% else %}
+                                                
+                                                <div class="col-lg-4 col-md-6 single-exhibition">
+                                                    <p style="font-size: 20px; color: red;">No Comments available.</p>
+                                                </div>
+                                                {% endif %}
+                 
+                  
+               </div>
+               <div class="comment-form">
+                  <h4>Leave a Reply</h4>
+                  <form class="form-contact comment_form" action="" method="POST">
+                    {% csrf_token %}
+                     <div class="row">
+                        <div class="col-12">
+                           <div class="form-group">
+                              <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+                                 placeholder="Write Comment"></textarea>
+                                 <input class="form-control" name="post_id" id="post_id" type="hidden" value="{{sinnews.id}}">
+                           </div>
+                        </div>
+                        <div class="col-sm-6">
+                           <div class="form-group">
+                              <input class="form-control" name="name" id="name" type="text" placeholder="Name">
+                           </div>
+                        </div>
+                        <div class="col-sm-6">
+                           <div class="form-group">
+                              <input class="form-control" name="email" id="email" type="email" placeholder="Email">
+                           </div>
+                        </div>
+                    
+                     </div>
+                     <div class="form-group">
+                        <button type="submit" class="button button-contactForm btn_1 boxed-btn">Send Message</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+            <div class="col-lg-4">
+               <div class="blog_right_sidebar">
+                
+                  <aside class="single_sidebar_widget post_category_widget">
+                     <h4 class="widget_title">Category</h4>
+                     <ul class="list cat-list">
+                        {% for category in category_counts %}
+                        <li>
+                           <a href="{% url 'category_detail' id=category.id %}" class="d-flex">
+                              <p>{{category.catname}}</p>
+                              <p>({{ category.news_count }})</p>
+                           </a>
+                        </li>{% endfor %}
+                      
+                     </ul>
+                  </aside>
+                  <aside class="single_sidebar_widget popular_post_widget">
+                     <h3 class="widget_title">Recent Post</h3>
+                     {% for i in recentnews  %}
+                     <div class="media post_item">
+
+                        <img src="{{i.postimage.url}}" alt="post" width="100" height="100">
+                        <div class="media-body">
+                           <a href="{% url 'view_single_news' i.id %}">
+                              <h3>{{i.posttitle}}</h3>
+                           </a>
+                           <p>{{i.posted_date}}</p>
+                        </div>
+                     </div>{% endfor %}
+                    
+                   
+                     
+                  </aside>
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>{% endblock %}

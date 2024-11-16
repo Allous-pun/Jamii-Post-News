@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="pagetitle">
+      <h1>View Comments</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item">View Comments</li>
+          
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        
+
+        <div class="col-lg-12" style="padding-left: 100px;padding-right: 100px;">
+
+         
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">View Comments</h5>
+              {% if messages %}
+              {% for message in messages %}
+               {% if message.tags == 'error' %}
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+               </button>
+                </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+                 {% if messages %}
+              {% for message in messages %}
+               {% if message.tags == 'success' %}
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+               </button>
+                </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+              <!-- Primary Color Bordered Table -->
+              <table id="example2" class="table table-bordered table-hover">
+                {% for i in view_comments %}   
+                <tr>
+                    <th>Name</th>
+                       <td colspan="3">{{i.name }}</td>
+                       <th>Email</th>
+                       <td>{{i.email }}</td>
+                       </tr> 
+<tr>
+                   
+                 
+                    <th>News Title</th>
+                       <td colspan="8">{{i.news_id.posttitle }}<br />
+                        <a href="{% url 'views_posts' i.news_id.id %}" target="_blank">View Details</a>
+                       </td>
+                       </tr>  
+                       <tr>
+                    <th>Comments</th>
+                       <td colspan="4">{{i.comment}}</td>
+
+                    <th>Comments Date</th>
+                       <td colspan="4">{{i.posted_date }}</td>
+                     </tr>
+             
+                       <tr>
+                     
+
+<th>Status</th>
+<td colspan="8"> {% if i.status %}
+    {% if i.status == 'Approved' %}
+       Approved
+    {% elif i.status == 'Unapproved' %}
+       Unapproved
+    {% endif %}
+{% else %}
+    Not Action Taken Yet
+{% endif %}</td>
+</tr>
+
+
+              </table>
+
+              <div class="card">
+                <div class="card-body">
+                  
+    
+                  <!-- Basic Modal -->
+                  {% if i.status == '' %}
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+                    Take Action
+                  </button>{% endif %}
+                  <div class="modal fade" id="basicModal" tabindex="-1">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Take Action</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="{% url 'update-comments-status' %}">
+                                {% csrf_token %}
+                                <div class="modal-body">
+                                <table class="table table-bordered table-hover data-tables">
+                                    <tr>
+                                        <th>Status :</th>
+                          
+                                        <td>
+                                          
+                                            <select  class="form-control" required="true" name="status">
+                                            <option value="">Select Status</option>
+                                            <option value="Approved">Approved</option>
+                                            <option value="Unapproved">Unapproved</option></select>
+                                            <input type="hidden" value="{{ i.id }}" name="comm_id" id="comm_id" class="form-control" required="">
+                                        </td>
+                                    </tr> 
+                                   
+                                </table>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Update</button>
+                        </div></form>
+                      </div>
+                    </div>
+                  </div><!-- End Basic Modal-->
+    
+                </div>
+              </div>
+{% endfor %}
+           
+              <!-- End Primary Color Bordered Table -->
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </section>  {% endblock %}

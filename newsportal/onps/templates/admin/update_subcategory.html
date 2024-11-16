@@ -1,0 +1,85 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="pagetitle">
+      <h1>Update Subcategory</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item">Update Subcategory</li>
+         
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+      <div class="row">
+       
+
+        <div class="col-lg-12" style="padding-left: 100px;padding-right: 100px;">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Update Subcategory</h5>
+              {% if messages %}
+              {% for message in messages %}
+               {% if message.tags == 'error' %}
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+               </button>
+                </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+                 {% if messages %}
+              {% for message in messages %}
+               {% if message.tags == 'success' %}
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{message}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+               </button>
+                </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+              <!-- Vertical Form -->
+              <form class="row g-3" method="POST" action="{% url 'update_subcategory_details' %}">
+                {% csrf_token %}
+
+                
+                <div class="col-12">
+                    <input type="hidden" name="subcat_id" class="form-control" id="subcat_id" required="true" value="{{subcategory.id}}">
+                  <label for="inputEmail4" class="form-label">Select Category Name</label>
+                  <select name="cat_id" class="form-control" required="true">
+              
+                    <option value="{{subcategory.cat_id}}">{{subcategory.cat_id.catname}}</option>
+                    {% for i in category %}
+                     
+                   
+                    <option value="{{ i.id }}" {% if i.id == subcategory.cat_id.id %} selected {% endif %}>{{ i.catname }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label for="inputPassword4" class="form-label">Subcategory Name</label>
+                  <input type="text" placeholder="Enter Subcategory Name"  name="subcatname" class="form-control" required="true" value="{{subcategory.subcatname}}">
+                </div>
+                
+                
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                 
+                </div>
+              </form><!-- Vertical Form -->
+
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </section>
+    {% endblock %}
